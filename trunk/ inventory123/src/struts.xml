@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+   "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+   "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+
+<struts>
+	<constant name="struts.devMode" value="false" />
+	<constant name="struts.objectFactory" value="spring" />
+	<constant name="struts.action.extension" value=",action,json" />
+
+	<package name="default" namespace="/" extends="json-default">
+		<default-action-ref name="UnderConstruction" />
+
+		<action name="UnderConstruction">
+			<result>/jsp/404.jsp</result>
+		</action>
+
+		<action name="loginAction" class="com.untitle.inventory.controller.LoginAction" method="authenticate">
+			<result name="success">/jsp/HomePage.jsp</result>
+			<result name="failed">/jsp/HomePage.jsp</result>
+		</action>
+		<action name="accessMenuModifyAction" class="accessMenuAction"
+			method="getAccessDetails">
+			<result type="json">
+				<param name="root">menu</param>
+			</result>
+		</action>
+		<action name="logout" class="com.untitle.inventory.controller.LoginAction" method="logout">
+			<result name="loginPage" type="redirect">/</result>
+		</action>
+		<action name="changePasswordDetails" class="com.untitle.inventory.controller.LoginAction" method="changePasswordData">
+		<result type="json">
+				<param name="root">callBackStatus</param>
+			</result>
+		</action>
+		
+		
+		<action name="uomGridDataAction" class="com.untitle.inventory.controller.UOMGridDataAction" method="getData">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+			
+		</action>
+				<action name="uomDataModifyAction" class="com.untitle.inventory.controller.UOMGridDataAction" method="saveData">
+			<result type="json">
+				<param name="root">callBackStatus</param>
+			</result>
+		</action>
+		<action name="uomDataDeleteAction" class="com.untitle.inventory.controller.UOMGridDataAction" method="deleteUOM">
+		<result type="json">
+				<param name="root">callBackStatus</param>
+			</result>
+		</action>
+		
+		
+		<action name="taxGridDataAction" class="com.untitle.inventory.controller.TaxGridDataAction" method="getData">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+			
+		</action>
+				<action name="taxDataModifyAction" class="com.untitle.inventory.controller.TaxGridDataAction" method="saveData">
+			<result type="json">
+				<param name="root">callBackStatus</param>
+			</result>
+		</action>
+		<action name="taxDataDeleteAction" class="com.untitle.inventory.controller.TaxGridDataAction" method="deleteTax">
+		<result type="json">
+				<param name="root">callBackStatus</param>
+			</result>
+		</action>
+	
+		<action name="rangeGridDataAction" class="com.untitle.inventory.controller.RangeGridDataAction" method="getData">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+			
+		</action>
+				<action name="rangeDataModifyAction" class="com.untitle.inventory.controller.RangeGridDataAction" method="saveData">
+			<result type="json">
+				<param name="root">callBackStatus</param>
+			</result>
+		</action>
+		<action name="rangeDataDeleteAction" class="com.untitle.inventory.controller.RangeGridDataAction" method="deleteRange">
+		<result type="json">
+				<param name="root">callBackStatus</param>
+			</result>
+		</action>
+		
+		<action name="unitGridDataAction" class="com.untitle.inventory.controller.UnitGridDataAction" method="getData">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+			
+		</action>
+				<action name="unitDataModifyAction" class="com.untitle.inventory.controller.UnitGridDataAction" method="saveData">
+			<result type="json">
+				<param name="root">callBackStatus</param>
+			</result>
+		</action>
+		<action name="unitDataDeleteAction" class="com.untitle.inventory.controller.UnitGridDataAction" method="deleteUnit">
+		<result type="json">
+				<param name="root">callBackStatus</param>
+			</result>
+		</action>
+			
+			
+		<action name="getAllRange" class="com.untitle.inventory.controller.RangeGridDataAction" method="getAllRange">
+			<result type="json">
+				<param name="root">rangeMasterDTOs</param>
+			</result>
+		</action>
+		<action name="getAllUOM" class="com.untitle.inventory.controller.UOMGridDataAction" method="getAllUOM">
+			<result type="json">
+				<param name="root">uomMasterDTOs</param>
+			</result>
+		</action>
+		
+				<action name="ingredientDataModifyAction" class="com.untitle.inventory.controller.IngredientGridDataAction" method="saveData">
+			<result type="json">
+				<param name="root">callBackStatus</param>
+			</result>
+		</action>
+		
+		<action name="ingGridDataAction" class="com.untitle.inventory.controller.IngredientGridDataAction" method="getData">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+			
+		</action>
+		
+		
+			
+	</package>
+	
+	</struts>
+
+
+	
+
