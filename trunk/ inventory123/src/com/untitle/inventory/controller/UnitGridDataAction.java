@@ -181,4 +181,10 @@ public class UnitGridDataAction extends CommonAction {
 		return Action.SUCCESS;
 	}
 
+	public String getAllUnit()
+	{
+		unitMasterDTOs=unitMasterService.getUnitDetails();
+		return Action.SUCCESS;
+	}
+
 }

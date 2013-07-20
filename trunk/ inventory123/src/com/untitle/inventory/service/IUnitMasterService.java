@@ -15,4 +15,5 @@ public interface IUnitMasterService {
 	UnitMasterDTO getUnitDetailsById(Long unitCode);
 	void save(UnitMasterDTO unitMasterDTO);
 	void delete(Long unitCode);
+	List<UnitMasterDTO> getUnitDetails();
 }
