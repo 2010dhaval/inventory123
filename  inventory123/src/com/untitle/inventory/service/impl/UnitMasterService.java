@@ -12,7 +12,9 @@ import com.untitle.inventory.commons.FilterCriteria;
 import com.untitle.inventory.commons.GridActionHelper;
 import com.untitle.inventory.commons.GridData;
 import com.untitle.inventory.dao.ICommonDAO;
+import com.untitle.inventory.dto.RangeMasterDTO;
 import com.untitle.inventory.dto.UnitMasterDTO;
+import com.untitle.inventory.model.RangeMaster;
 import com.untitle.inventory.model.UnitMaster;
 import com.untitle.inventory.service.IUnitMasterService;
 @Service("IUnitMasterService")
@@ -104,6 +106,21 @@ public class UnitMasterService implements IUnitMasterService{
 		UnitMaster unitMaster=commonDAO.getById(UnitMaster.class,unitCode);		
 		unitMaster.setIsDeleted(1);
 		commonDAO.saveOrUpdate(unitMaster);
+	}
+
+	@Override
+	public List<UnitMasterDTO> getUnitDetails() {
+		// TODO Auto-generated method stub
+			List<UnitMasterDTO> unitMasterDTOs=new ArrayList<UnitMasterDTO>();
+			List<UnitMaster> unitMasterList = commonDAO.getAll(UnitMaster.class);
+			if (unitMasterList.size() > 0) {
+			for (UnitMaster unitMaster: unitMasterList)
+			{
+				unitMasterDTOs.add(getDTOFromMaster(unitMaster));
+			}
+			}
+			return unitMasterDTOs;
+
 	}
 
 	}
