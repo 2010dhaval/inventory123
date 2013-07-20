@@ -36,7 +36,7 @@
 						
 						<tr>
 							<td><label class="errMsg">*</label>Ingredient Code:</td>
-							<td><input type="text" name="ingCode" id="ingCode" value="" disabled="disabled"/>
+							<td><input type="text" name="ingCode" id="ingCode" value="" readonly="readonly"/>
 							<label id="lblSearch"  
 								style="cursor: pointer" >
 								<a tabindex="2"> <img src="<%=request.getContextPath()%>/images/search_button.jpg"
@@ -76,7 +76,7 @@
 							<div class="buttonwrapper">
 	                  		<a class="boldbuttons"  id="submit"><span>Save</span></a>
 	                  		<div class="buttonSeperator">&nbsp;</div>
-	                  		<a class="boldbuttons"  id="cancel"><span>Cancel</span></a>
+	                  		<a class="boldbuttons"  id="delete"><span>Delete</span></a>
 	                  		<div class="clearer"></div>
 	                  		
 	                  	</div>

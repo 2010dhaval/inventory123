@@ -129,7 +129,17 @@
 			
 		</action>
 		
+		<action name="ingredientGetByCode" class="com.untitle.inventory.controller.IngredientGridDataAction" method="getIngredientByCode">
+			<result type="json">
+				<param name="root">ingredientMasterDTO</param>
+			</result>			
+		</action>
 		
+		<action name="ingDataDeleteAction" class="com.untitle.inventory.controller.IngredientGridDataAction" method="delete">
+		<result type="json">
+				<param name="root">callBackStatus</param>
+			</result>
+		</action>
 			
 	</package>
 	

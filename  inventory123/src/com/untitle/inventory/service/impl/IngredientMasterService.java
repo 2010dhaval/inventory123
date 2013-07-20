@@ -108,4 +108,20 @@ public class IngredientMasterService implements IIngredientMasterService{
 
 	}
 
+	@Override
+	public IngredientMasterDTO getIngredientDetailsById(Long ingCode) {
+		// TODO Auto-generated method stub
+		
+		IngredientMaster ingredientMaster=commonDAO.getById(IngredientMaster.class, ingCode);
+		return getDTOFromMaster(ingredientMaster);
+	}
+
+	@Override
+	public void delete(Long ingCode) {
+		// TODO Auto-generated method stub
+		IngredientMaster ingredientMaster=commonDAO.getById(IngredientMaster.class, ingCode);
+		ingredientMaster.setIsDeleted(1);
+		commonDAO.saveOrUpdate(ingredientMaster);
+	}
+
 	}
