@@ -13,7 +13,7 @@ import com.untitle.inventory.dto.MenuMasterDTO;
 public interface IIngredientMasterService {
 	GridData getIngredientDetails(FilterCriteria filterCriteria);
 	//List<RangeMasterDTO> getRangeDetails();
-	//RangeMasterDTO getRangeDetailsById(String rangeCode);
+	IngredientMasterDTO getIngredientDetailsById(Long ingCode);
 	void save(IngredientMasterDTO ingredientMasterDTO);
-	//void delete(String rangeCode);
+	void delete(Long ingCode);
 }

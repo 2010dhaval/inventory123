@@ -16,11 +16,8 @@ import com.untitle.inventory.commons.GridData;
 import com.untitle.inventory.commons.JQGridJSON;
 import com.untitle.inventory.commons.JQGridRow;
 import com.untitle.inventory.dto.IngredientMasterDTO;
-import com.untitle.inventory.dto.IngredientMasterDTO;
 import com.untitle.inventory.dto.UOMMasterDTO;
 import com.untitle.inventory.service.IIngredientMasterService;
-import com.untitle.inventory.service.IIngredientMasterService;
-import com.untitle.inventory.service.IUOMMasterService;
 
 
 
@@ -30,8 +27,16 @@ public class IngredientGridDataAction extends CommonAction {
 	@Autowired
 	IIngredientMasterService ingredientMasterService;
 	
+	IngredientMasterDTO ingredientMasterDTO=null;
 	
-	
+	public IngredientMasterDTO getIngredientMasterDTO() {
+		return ingredientMasterDTO;
+	}
+
+	public void setIngredientMasterDTO(IngredientMasterDTO ingredientMasterDTO) {
+		this.ingredientMasterDTO = ingredientMasterDTO;
+	}
+
 	public IIngredientMasterService getIngredientMasterService() {
 		return ingredientMasterService;
 	}
@@ -148,7 +153,7 @@ public class IngredientGridDataAction extends CommonAction {
 		String ingCode=request.getParameter("ingCode");
 		String ingDesc=request.getParameter("ingDesc");
 		String purPrice=request.getParameter("purPrice");
-		String[] range=request.getParameterValues("ingredient");
+		String[] range=request.getParameterValues("range");
 		String r="";
 		int i=0;
 		for(String ra:range)
@@ -175,6 +180,31 @@ public class IngredientGridDataAction extends CommonAction {
 		ingredientMasterDTO.setUomMasterDTO(uomMasterDTO);
 		ingredientMasterService.save(ingredientMasterDTO);
 		callBackStatus.setStatus("success");
+		}
+		catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			callBackStatus.setStatus("failed");
+			callBackStatus.setErrorMessage(e.getMessage());
+		}
+		return Action.SUCCESS;
+	}
+	
+	public String getIngredientByCode()
+	{
+		String ingCode=request.getParameter("ingCode");
+		ingredientMasterDTO=ingredientMasterService.getIngredientDetailsById(Long.parseLong(ingCode));
+		return Action.SUCCESS;
+	}
+	
+	public String delete()
+	{
+		callBackStatus=new CallBackStatus();
+		try
+		{
+			String ingCode=request.getParameter("id");
+			ingredientMasterService.delete(Long.parseLong(ingCode));
+			callBackStatus.setStatus("success");
 		}
 		catch (Exception e) {
 			// TODO: handle exception
