@@ -157,6 +157,13 @@
 				<param name="root">itemHeaderDTO</param>
 			</result>			
 		</action>	
+		
+		<action name="itemDataDeleteAction" class="com.untitle.inventory.controller.ItemGridDataAction" method="delete">
+		<result type="json">
+				<param name="root">callBackStatus</param>
+			</result>
+		</action>
+		
 	</package>
 	
 	</struts>
