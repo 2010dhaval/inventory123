@@ -12,7 +12,7 @@
 				var i = 0;
 			var menuDetails="";
 			for (i = 0; i < menuList.length; i++) {
-				menuDetails+= "<li id='"+menuList[i].id+"'> <input type='checkbox' id='"+menuList[i].id+"' name='menuIds' value='"+menuList[i].id+"'";
+				menuDetails+= "<li id='"+menuList[i].id+"'> <input type='checkbox' id='"+menuList[i].id+"' name='menuIds' value='"+menuList[i].id+"'">;
 				if(hashtable[menuList[i].id])
 				{
 					menuDetails+= " checked='checked' ";
