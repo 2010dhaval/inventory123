@@ -15,12 +15,10 @@ import com.untitle.inventory.commons.FilterCriteria;
 import com.untitle.inventory.commons.GridData;
 import com.untitle.inventory.commons.JQGridJSON;
 import com.untitle.inventory.commons.JQGridRow;
-import com.untitle.inventory.dto.IngredientMasterDTO;
 import com.untitle.inventory.dto.ItemDetailsDTO;
 import com.untitle.inventory.dto.ItemHeaderDTO;
 import com.untitle.inventory.dto.RangeMasterDTO;
 import com.untitle.inventory.dto.UOMMasterDTO;
-import com.untitle.inventory.service.IIngredientMasterService;
 import com.untitle.inventory.service.IItemService;
 
 
@@ -100,24 +98,19 @@ public class ItemGridDataAction extends CommonAction {
 		if(request.getParameter("_search")!=null && request.getParameter("_search").equalsIgnoreCase("true"))
 		{
 			Map<String,String> searchCond = new HashMap<String, String>();
-			//searchCond.put("ingCode", request.getParameter("ingCode"));
-			//searchCond.put("ingDesc", request.getParameter("ingCode"));
+			searchCond.put("ingCode", request.getParameter("itemCode"));
+			searchCond.put("ingDesc", request.getParameter("itemCode"));
 			filterCriteria.setSearchCriteria(searchCond);
 		}		
-		int count;
-		//List<IngredientMasterDTO> ingredientMasterDTOs=new ArrayList<IngredientMasterDTO>();
-		//gridData=ingredientMasterService.getIngredientDetails(filterCriteria);*/
-		
-		// start of testing code-----------------------------
-		
+		int count;		
 		List<ItemHeaderDTO> itemHeaderDTOs=new ArrayList<ItemHeaderDTO>();
-		
+		gridData=ingredientMasterService.getIngredientDetails(filterCriteria);
 		ItemHeaderDTO itemHeaderDTO=null;
 		UOMMasterDTO uomMasterDTO=null;
 		RangeMasterDTO rangeMasterDTO=null;
 		List<ItemDetailsDTO> itemDetailsDTOs=new ArrayList<ItemDetailsDTO>();
 		
-		itemHeaderDTO=new ItemHeaderDTO();
+	/*	itemHeaderDTO=new ItemHeaderDTO();
 		itemHeaderDTO.setId(1l);
 		itemHeaderDTO.setItemDesc("KK");
 		itemHeaderDTO.setSellingPrice(123d);
@@ -138,7 +131,7 @@ public class ItemGridDataAction extends CommonAction {
 		gridData.setListData(itemHeaderDTOs);
 		
 		// end of testing code-----------------------------
-		count = gridData.getCount();
+*/		count = gridData.getCount();
 		jsonData = new JQGridJSON();
 		jsonData.setPage(filterCriteria.getCurrentPage());//pageCount
 		jsonData.setRecords(count);
@@ -151,8 +144,13 @@ public class ItemGridDataAction extends CommonAction {
 			JQGridRow row = new JQGridRow(); 
 			List<String> cells = new ArrayList<String>();
 			cells.add(item.getId()+"");
-			cells.add(item.getItemDesc());
+			cells.add(item.getItemDesc());				
+			
+			cells.add(item.getRangeMasterDTO().getRangeCode());
+			cells.add(item.getUomMasterDTO().getUomName());
 			cells.add(item.getSellingPrice()+"");
+			cells.add(item.getWarningQty()+"");
+			
 			row.setId(item.getId()+"");
 			row.setCell(cells); 
 			rows.add(row);
