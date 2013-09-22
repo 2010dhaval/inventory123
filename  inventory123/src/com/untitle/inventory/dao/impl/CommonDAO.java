@@ -165,7 +165,7 @@ public class CommonDAO<T> extends HibernateDaoSupport implements ICommonDAO<T> {
 		try
 		{
 			Criteria criteria = getSession().createCriteria(entityClass);
-			criteria.add(Restrictions.ne("isDeleted",1));	
+			//criteria.add(Restrictions.ne("isDeleted",1));	
 			return criteria.list().size();
 		}
 		catch (Exception e) {
@@ -180,9 +180,13 @@ public class CommonDAO<T> extends HibernateDaoSupport implements ICommonDAO<T> {
 	public List<T> getAll(int start, int limitInt, String sidx, String sord,
 			Map<String, String> searchCond,Class<?> entityClass) {
 		// TODO Auto-generated method stub
+		
+		try
+		{
+	
 		Criteria criteria=getSession().createCriteria(entityClass);
-		criteria.add(Restrictions.ne("isDeleted",1));
-		if (searchCond != null)
+		//criteria.add(Restrictions.ne("isDeleted",1));
+		/*if (searchCond != null)
 		{
 			for(String searchKey:searchCond.keySet())
 			{
@@ -202,15 +206,20 @@ public class CommonDAO<T> extends HibernateDaoSupport implements ICommonDAO<T> {
 			criteria.addOrder(Order.asc(sidx));
 		}
 		criteria.setFirstResult(start);
-		criteria.setMaxResults(limitInt);	
+		criteria.setMaxResults(limitInt);*/	
 		return criteria.list();
+		}catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	@Override
 	public List<T> getAll(Class<?> entityClass) {
 		// TODO Auto-generated method stub
 		Criteria criteria=getSession().createCriteria(entityClass);
-		criteria.add(Restrictions.ne("isDeleted",1));
+		//criteria.add(Restrictions.ne("isDeleted",1));
 		return criteria.list();
 	}
 
