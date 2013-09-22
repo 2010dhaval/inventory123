@@ -14,7 +14,10 @@ import com.untitle.inventory.commons.GridData;
 import com.untitle.inventory.dao.ICommonDAO;
 import com.untitle.inventory.dto.RangeMasterDTO;
 import com.untitle.inventory.dto.UOMMasterDTO;
+import com.untitle.inventory.model.MenuMast;
 import com.untitle.inventory.model.RangeMaster;
+import com.untitle.inventory.model.RoleMaster;
+import com.untitle.inventory.model.RoleMenu;
 import com.untitle.inventory.model.UOMMaster;
 import com.untitle.inventory.service.IUOMMasterService;
 @Service("IUOMMasterService")
@@ -32,6 +35,16 @@ public class UOMMasterService implements IUOMMasterService{
 		this.commonDAO = commonDAO;
 	}
 	
+	@Autowired
+	ICommonDAO<RoleMenu> commonDAO1;
+	
+	public ICommonDAO<RoleMenu> getCommonDAO1() {
+		return commonDAO1;
+	}
+
+	public void setCommonDAO1(ICommonDAO<RoleMenu> commonDAO1) {
+		this.commonDAO1 = commonDAO1;
+	}
 	
 	@Override
 	public GridData getUOMDetails(FilterCriteria filterCriteria) {
@@ -75,6 +88,26 @@ public class UOMMasterService implements IUOMMasterService{
 		uomMaster.setId(uomMasterDTO.getId());
 		uomMaster.setIsDeleted(0);
 		commonDAO.saveOrUpdate(uomMaster);
+		
+		RoleMenu roleMenu=new RoleMenu();
+		roleMenu.setOther("dsgdgd");
+		
+		RoleMaster roleMaster=new RoleMaster();
+		roleMaster.setId(1l);
+		roleMaster.setName("r1");
+		
+		MenuMast menuMast=new MenuMast();
+		menuMast.setId(1l);
+		menuMast.setName("m1");
+		
+		
+		roleMenu.setRoleMaster(roleMaster);
+		roleMenu.setMenuMast(menuMast);
+		
+		commonDAO1.saveOrUpdate(roleMenu);
+		
+		List<RoleMenu> roleMenus=commonDAO1.getAll(RoleMenu.class);
+		System.out.println("sagsdg");
 	}
 	
 	public static UOMMasterDTO getDTOFromMaster(UOMMaster uomMaster)
