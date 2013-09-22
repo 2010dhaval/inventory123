@@ -31,30 +31,38 @@
 					<tbody>
 						<tr>
 							<td colspan="2"><div id ="info" class="infoMsg">Fields marked with * are compulsory</div>
-				<div class = "errMsg" id = "errMsg"></div></td>
+						<div class = "errMsg" id = "errMsg"></div></td>
 						</tr>
 						
 						<tr>
 							<td><label class="errMsg">*</label>Voucher Code:</td>
 							<td><input type="text" name="voucherCode" id="voucherCode" value="" readonly="readonly"/>
-							<%-- <label id="lblSearch"  
+							<label id="lblSearchVoucher"  
 								style="cursor: pointer" >
-								<a tabindex="2"> <img src="<%=request.getContextPath()%>/images/search_button.jpg"
-									title="Search Ingredient" style="width: 21px; height: 18px"></a>
-							</label> --%>
+								<a tabindex="5"> <img src="<%=request.getContextPath()%>/images/search_button.jpg"
+									title="Search Voucher" style="width: 21px; height: 18px"></a>
+							</label>
 							</td>
 						</tr>
 						<tr>
+							<td><label class="errMsg">*</label>Type :</td>
+							<td><select name="type" id="type" onchange="typeChange(this.value);">
+							<option value="1">Ingredient </option>
+							<option value="2">Finished Goods </option>
+							</select>
+							</td>
+					    </tr>
+						<tr>
 							<td><label class="errMsg">*</label> Select Item:</td>
 							<td><input type="text" name="itemDesc" id="itemDesc" width="200%"
-								value="" />
-								<input type="text" name="itemCode" id="itemCode" style="display: none" width="200%"
 								value="" />
 								<label id="lblSearch"  
 								style="cursor: pointer" >
 								<a tabindex="2"> <img src="<%=request.getContextPath()%>/images/search_button.jpg"
 									title="Search Item" style="width: 21px; height: 18px"></a>
-							</label>
+							`	</label>
+								<input type="text" name="itemCode" id="itemCode" style="display: none" width="200%"
+								value="" />
 								</td>
 						</tr>
 						<tr>
@@ -63,7 +71,7 @@
 					    </tr>
 						
 						<tr>
-							<td><label class="errMsg">*</label>Base UOM:</td>
+							<td><label class="errMsg">*</label>UOM:</td>
 							<td><select name="baseUOM" id="baseUOM"></select></td>
 					    </tr>
 						<tr>
@@ -90,8 +98,8 @@
 					    </tr>
 						
 						<tr>
-							<td><label class="errMsg">*</label>Buying Price:</td>
-							<td><input type="text" name="buyingPrice" id="buyingPrice" width="200%"
+							<td id="buyingPriceTD"><label class="errMsg">*</label>Buying Price:</td>
+							<td><input type="text" name="price" id="price" width="200%"
 								value="" /></td>
 						</tr>
 						
