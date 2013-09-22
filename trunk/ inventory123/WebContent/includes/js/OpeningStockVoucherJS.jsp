@@ -73,9 +73,23 @@
 				
 				jQuery('#lblSearch').click(function()
 				{
-					alert("ddddd");
 					jQuery('#dialog-modal').dialog( "open");
+					
+					var type=jQuery('#type').val();
+					
+					if(type==1)
+					displayIngredientSearchPopup(ingSearch);
+					else
 					displayItemSearchPopup(itemSearch);
+				});
+			
+				jQuery('#lblSearchVoucher').click(function()
+				{
+				alert("iiiiii");
+					jQuery('#dialog-modal').dialog( "open");
+					
+					displayVoucherSearchPopup(voucherSearch);
+					
 				});
 				
 						});
@@ -103,6 +117,50 @@
 						gridDiv:"#grid"
 					});
 				}
+				
+				function displayVoucherSearchPopup(selectHandler)
+				{
+					var columnHeader = ["Voucher Code", 
+					                 "Type","Name"];
+					var columns =  ["voucheCode","type","name"];
+					jQuery("#grid").popupgrid({
+						colNames : columnHeader,
+						colModel : [ {
+							name : columns[0],
+							index : columns[0],
+							width : 35
+						}, {
+							name : columns[1],
+							index : columns[1],
+							width : 35
+						}, {
+							name : columns[2],
+							index : columns[2],
+							width : 35
+						}],
+						url : 'voucherGridDataAction.action',
+						caption : "Select Voucher",
+						selectHandler:selectHandler,
+						gridDiv:"#grid"
+					});
+				}
+		
+				function voucherSearch(id)
+				{
+					jQuery('#dialog-modal').dialog( "close" );
+					jQuery('#loadingMsg').show();
+					
+					$.ajax({
+	  url: 'getVoucherByCode.action?voucherCode='+id,
+	  success:function(responseText)
+		 {
+		 	alert(responseText.id);
+		 	alert(responseText.itemDesc);
+			jQuery('#itemCode').val(responseText.id);
+			jQuery('#itemDesc').val(responseText.itemDesc);
+	     }
+		});				
+		
 				
 				function itemSearch(id)
 				{
@@ -138,4 +196,91 @@
 	 {
 	 	   
 	 }
-	 
+	 	function displayIngredientSearchPopup(selectHandler)
+				{
+					alert("ssss");
+					var columnHeader = ["Ind Code", 
+					                 "Ind Desc", 
+					                 "Range","Base UOM","Purchase Price","Warning Quantity" ];
+					var columns =  ["ingCode","ingDesc","range","baseUOM","purPrice","warQty"];
+					jQuery("#grid").popupgrid({
+						colNames : columnHeader,
+						colModel : [ {
+							name : columns[0],
+							index : columns[0],
+							width : 35
+						}, {
+							name : columns[1],
+							index : columns[1],
+							width : 35
+						}, {
+							name : columns[2],
+							index : columns[2],
+							width : 30
+						}, {
+							name : columns[3],
+							index : columns[3],
+							width : 30
+						}, {
+							name : columns[4],
+							index : columns[4],
+							width : 30
+						}, {
+							name : columns[5],
+							index : columns[5],
+							width : 30
+						}],
+						url : 'ingGridDataAction.action',
+						caption : "Select Ingredient",
+						selectHandler:selectHandler,
+						gridDiv:"#grid"
+					});
+				}
+				
+				function ingSearch(ingCode)
+				{
+					jQuery('#dialog-modal').dialog( "close" );
+					jQuery('#loadingMsg').show();
+					
+					$.ajax({
+	  url: 'ingredientGetByCode.action?ingCode='+ingCode,
+	  success:function(responseText)
+		 {
+			jQuery('#ingCode').val(responseText.ingCode);
+			jQuery('#ingDesc').val(responseText.ingDesc);
+			jQuery('#baseUOM').val(responseText.uomMasterDTO.id);
+			jQuery('#purPrice').val(responseText.purPrice);
+			jQuery('#warQty').val(responseText.warQry);
+			
+			var select = document.getElementById("range");
+ 					
+			var range = responseText.ingRange;
+			alert(range);
+			var splitRange=range.split(",");
+			alert(splitRange);	
+			alert(splitRange.length);		
+					for(j=0;j < splitRange.length ;j++)
+ 					{
+ 					for(i=0;i < select.options.length ;i++)
+ 					{
+ 					alert(select.options[i].value);
+ 					alert(splitRange[j]);
+ 					if(select.options[i].value==splitRange[j])
+ 					select.options[i].selected=true;
+ 					}
+ 					}
+	     }
+		});				
+					jQuery('#loadingMsg').hide();
+				 }
+			function typeChange(value)
+			{
+			if(value==2)
+			{
+			jQuery('#buyingPriceTD').html("Selling price");
+			}
+			else
+			{
+			jQuery('#buyingPriceTD').html("Buying price");
+			}
+			}
