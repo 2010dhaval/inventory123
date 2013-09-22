@@ -59,6 +59,14 @@
 		<value>com.untitle.inventory.model.UnitMaster</value>
 		<value>com.untitle.inventory.model.IngredientMaster</value>
 		
+		
+		<value>com.untitle.inventory.model.RoleMaster</value>
+		<value>com.untitle.inventory.model.MenuMast</value>
+		<value>com.untitle.inventory.model.RoleMenu</value>
+		<value>com.untitle.inventory.model.REQMaster</value>
+		<value>com.untitle.inventory.model.MaterialGroupMaster</value>
+		<value>com.untitle.inventory.model.PurchaseGroupMaster</value>
+		
 	</list>
 	
     </property>
