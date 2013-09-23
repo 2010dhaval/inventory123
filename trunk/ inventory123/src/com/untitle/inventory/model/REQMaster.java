@@ -1,5 +1,9 @@
 package com.untitle.inventory.model;
 
+
+
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -36,6 +40,26 @@ public class REQMaster {
 	private String plant;
 	@Column(name="MAT_GRP")
 	private String materialGroup;
+	
+	@Column (name = "QUANTITY")
+	private String quantity;
+	
+	@Column (name = "DELIV_DATE")
+	private Date delivDate;
+	
+	
+	public Date getDelivDate() {
+		return delivDate;
+	}
+	public void setDelivDate(Date delivDate) {
+		this.delivDate = delivDate;
+	}
+	public String getQuantity() {
+		return quantity;
+	}
+	public void setQuantity(String quantity) {
+		this.quantity = quantity;
+	}
 	public String getPreqNO() {
 		return preqNO;
 	}
