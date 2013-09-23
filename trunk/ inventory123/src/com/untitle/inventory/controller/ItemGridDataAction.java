@@ -88,7 +88,7 @@ public class ItemGridDataAction extends CommonAction {
 	}
 
 	public String getData()
-	{
+	{/*
 		FilterCriteria filterCriteria = new FilterCriteria();
 		GridData gridData;
 		filterCriteria.setSidx(request.getParameter("sidx")==null?"id":request.getParameter("sidx"));
@@ -110,7 +110,7 @@ public class ItemGridDataAction extends CommonAction {
 		RangeMasterDTO rangeMasterDTO=null;
 		List<ItemDetailsDTO> itemDetailsDTOs=new ArrayList<ItemDetailsDTO>();
 		
-	/*	itemHeaderDTO=new ItemHeaderDTO();
+		itemHeaderDTO=new ItemHeaderDTO();
 		itemHeaderDTO.setId(1l);
 		itemHeaderDTO.setItemDesc("KK");
 		itemHeaderDTO.setSellingPrice(123d);
@@ -131,7 +131,7 @@ public class ItemGridDataAction extends CommonAction {
 		gridData.setListData(itemHeaderDTOs);
 		
 		// end of testing code-----------------------------
-*/		count = gridData.getCount();
+		count = gridData.getCount();
 		jsonData = new JQGridJSON();
 		jsonData.setPage(filterCriteria.getCurrentPage());//pageCount
 		jsonData.setRecords(count);
@@ -155,7 +155,7 @@ public class ItemGridDataAction extends CommonAction {
 			row.setCell(cells); 
 			rows.add(row);
 		}
-		jsonData.setRows(rows);
+		jsonData.setRows(rows);*/
 		
 		
 		return Action.SUCCESS;
