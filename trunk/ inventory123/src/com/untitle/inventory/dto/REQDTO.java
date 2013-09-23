@@ -1,5 +1,7 @@
 package com.untitle.inventory.dto;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Id;
 
@@ -20,6 +22,23 @@ public class REQDTO {
 	private String material;
 	private String plant;
 	private String materialGroup;
+	
+	private Date delivDate;
+	private String quantity;
+	
+	
+	public Date getDelivDate() {
+		return delivDate;
+	}
+	public void setDelivDate(Date delivDate) {
+		this.delivDate = delivDate;
+	}
+	public String getQuantity() {
+		return quantity;
+	}
+	public void setQuantity(String quantity) {
+		this.quantity = quantity;
+	}
 	public String getPreqNPO() {
 		return preqNO;
 	}
