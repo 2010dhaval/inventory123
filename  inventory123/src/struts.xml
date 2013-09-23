@@ -20,7 +20,7 @@
 			<result name="success">/jsp/HomePage.jsp</result>
 			<result name="failed">/jsp/HomePage.jsp</result>
 		</action>
-		<action name="accessMenuModifyAction" class="accessMenuAction"
+		<action name="accessMenuModifyAction" class="com.untitle.inventory.controller.AccessMenuAction"
 			method="getAccessDetails">
 			<result type="json">
 				<param name="root">menu</param>
@@ -122,7 +122,7 @@
 		</action>
 		
 		
-				<action name="ingredientDataModifyAction" class="com.untitle.inventory.controller.IngredientGridDataAction" method="saveData">
+		<action name="ingredientDataModifyAction" class="com.untitle.inventory.controller.IngredientGridDataAction" method="saveData">
 			<result type="json">
 				<param name="root">callBackStatus</param>
 			</result>
@@ -156,7 +156,38 @@
 			<result type="json">
 				<param name="root">itemHeaderDTO</param>
 			</result>			
-		</action>	
+		</action>
+		
+		<action name="openingStockSaveAction" class="com.untitle.inventory.controller.OpeningStockDataAction" method="saveData">
+			<result type="json">
+				<param name="root">callBackStatus</param>
+			</result>
+		</action>
+		
+		<action name="voucherGridDataAction" class="com.untitle.inventory.controller.OpeningStockDataAction" method="getData">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+		
+		<action name="testGridDataAction" class="com.untitle.inventory.controller.TestGridDataAction" method="getData">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+		
+		<action name="getAllMaterialGroup" class="com.untitle.inventory.controller.TestGridDataAction" method="getAllMaterialGroup">
+			<result type="json">
+				<param name="root">materialGroupMasterDTOs</param>
+			</result>
+		</action>
+		<action name="getAllPurchaseGroup" class="com.untitle.inventory.controller.TestGridDataAction" method="getAllPurchaseGroup">
+			<result type="json">
+				<param name="root">purchaseGroupMasterDTOs</param>
+			</result>
+		</action>
+		
+			
 		
 		<action name="itemDataDeleteAction" class="com.untitle.inventory.controller.ItemGridDataAction" method="delete">
 		<result type="json">
