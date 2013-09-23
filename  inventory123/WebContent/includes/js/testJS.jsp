@@ -158,6 +158,8 @@
 			  jQuery("#navgrid").hideCol('select');
 			   jQuery("#grid").show();*/
 		});
+		
+		//jQuery("#grid").hide();
 
 	});
 
@@ -186,5 +188,7 @@
 				//jQuery("#grid").show();
 				//jQuery("#divStartJoiningProcess").show();
 				//jQuery("#grid").show();
+				
+				jQuery("#grid").show();
 
 			});
