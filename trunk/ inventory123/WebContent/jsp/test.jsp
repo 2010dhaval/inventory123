@@ -74,7 +74,7 @@
 
 	</DIV>
 
-<DIV id="grid" >
+<DIV id="grid" ">
 			<TABLE id="navgrid"></TABLE>
 <div id="pagernav"></div>
 		</DIV>
