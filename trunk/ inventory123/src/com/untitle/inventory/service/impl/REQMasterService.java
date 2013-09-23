@@ -1,6 +1,7 @@
 package com.untitle.inventory.service.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -63,15 +64,22 @@ public class REQMasterService implements IREQMasterService{
 	}
 
 	@Override
-	public GridData getREQDetails(FilterCriteria filterCriteria) {
+	public GridData getREQDetails(FilterCriteria filterCriteria, String materialId, String purchaseId) {
 		// TODO Auto-generated method stub
 		List<REQDTO> rangeMasterDTOList = new ArrayList<REQDTO>();
+		
+		Map<String, String> param = new HashMap<String, String>();
+		
+		param.put("materialId", materialId);
+		param.put("purchaseId", purchaseId);
+		
 		GridData gridData = new GridData();
 		int count = commonDAO.getGridCount(REQMaster.class);
 		Map<String,Integer> values = GridActionHelper.calculate(count, filterCriteria.getCurrentPage(), filterCriteria.getLimit());
 		int start = values.get("start");
 		int totalPages = values.get("totalPages");
-		List<REQMaster> rangeMasterList = commonDAO.getAll(start,Integer.parseInt(filterCriteria.getLimit()), filterCriteria.getSidx(), filterCriteria.getSord(), filterCriteria.getSearchCriteria(),REQMaster.class);
+		List<REQMaster> rangeMasterList = commonDAO.getAll(start,Integer.parseInt(filterCriteria.getLimit()), filterCriteria.getSidx(), filterCriteria.getSord(), 
+				filterCriteria.getSearchCriteria(),REQMaster.class, param);
 		if (rangeMasterList.size() > 0) {
 		for (REQMaster rangeMaster: rangeMasterList)
 		{
@@ -83,6 +91,10 @@ public class REQMasterService implements IREQMasterService{
 			rangeMasterDTO.setMaterial(rangeMaster.getMaterial());
 			rangeMasterDTO.setPlant(rangeMaster.getPlant());
 			rangeMasterDTO.setMaterialGroup(rangeMaster.getMaterialGroup());
+			
+			rangeMasterDTO.setQuantity(rangeMaster.getQuantity());
+			rangeMasterDTO.setDelivDate(rangeMaster.getDelivDate());
+			
 			rangeMasterDTOList.add(rangeMasterDTO);
 		}
 		}
@@ -105,6 +117,9 @@ public class REQMasterService implements IREQMasterService{
 			rangeMasterDTO.setMaterial(rangeMaster.getMaterial());
 			rangeMasterDTO.setPlant(rangeMaster.getPlant());
 			rangeMasterDTO.setMaterialGroup(rangeMaster.getMaterialGroup());
+			
+			rangeMasterDTO.setQuantity(rangeMaster.getQuantity());
+			rangeMasterDTO.setDelivDate(rangeMaster.getDelivDate());
 			
 		}
 		return rangeMasterDTO;
