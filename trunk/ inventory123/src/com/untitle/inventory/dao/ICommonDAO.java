@@ -26,6 +26,9 @@ public T getById(Class<?> entity,Long id);
 public T getById(Class<?> entity,String id);
 public int getGridCount(Class<?> entityClass);
 List<T> getAll(int start,int limitInt,String sidx,String sord, Map<String,String> searchCond,Class<?> entityClass);
+
+List<T> getAll(int start,int limitInt,String sidx,String sord, Map<String,String> searchCond,Class<?> entityClass, Map<String, String> m1);
+
 List<T> getAll(Class<?> entityClass);
 
 
