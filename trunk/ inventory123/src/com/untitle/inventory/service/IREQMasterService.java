@@ -14,7 +14,7 @@ import com.untitle.inventory.dto.MenuMasterDTO;
 import com.untitle.inventory.model.REQMaster;
 
 public interface IREQMasterService {
-	GridData getREQDetails(FilterCriteria filterCriteria);
+	GridData getREQDetails(FilterCriteria filterCriteria, String materialId, String purchaseId);
 	List<REQDTO> getREQDetails();
 	
 	List<MaterialGroupMasterDTO> getMaterialGroupMasterDetails();
