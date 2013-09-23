@@ -178,7 +178,59 @@ public class CommonDAO<T> extends HibernateDaoSupport implements ICommonDAO<T> {
 	
 	@Override
 	public List<T> getAll(int start, int limitInt, String sidx, String sord,
-			Map<String, String> searchCond,Class<?> entityClass) {
+			Map<String, String> searchCond,Class<?> entityClass, Map<String, String> map) {
+		// TODO Auto-generated method stub
+		
+		try
+		{
+	
+		Criteria criteria=getSession().createCriteria(entityClass);
+		//criteria.add(Restrictions.ne("isDeleted",1));
+		/*if (searchCond != null)
+		{
+			for(String searchKey:searchCond.keySet())
+			{
+				String searchValue = searchCond.get(searchKey);
+				if(searchValue!=null)
+				{
+					criteria.add(Restrictions.like(searchKey,searchValue+"%"));
+				}
+			}
+		}
+		if(sord.equalsIgnoreCase("DESC"))
+		{
+			criteria.addOrder(Order.desc(sidx));
+		}
+		else
+		{
+			criteria.addOrder(Order.asc(sidx));
+		}
+		criteria.setFirstResult(start);
+		criteria.setMaxResults(limitInt);*/	
+		
+		criteria.add(Restrictions.eq("materialId", map.get("materialId")));
+		criteria.add(Restrictions.eq("purchaseId", map.get("purchaseId")));
+		
+		return criteria.list();
+		}catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	@Override
+	public List<T> getAll(Class<?> entityClass) {
+		// TODO Auto-generated method stub
+		Criteria criteria=getSession().createCriteria(entityClass);
+		//criteria.add(Restrictions.ne("isDeleted",1));
+		return criteria.list();
+	}
+
+	@Override
+	public List<T> getAll(int start, int limitInt, String sidx, String sord,
+			Map<String, String> searchCond, Class<?> entityClass) {
+
 		// TODO Auto-generated method stub
 		
 		try
@@ -213,14 +265,7 @@ public class CommonDAO<T> extends HibernateDaoSupport implements ICommonDAO<T> {
 			e.printStackTrace();
 			return null;
 		}
-	}
-
-	@Override
-	public List<T> getAll(Class<?> entityClass) {
-		// TODO Auto-generated method stub
-		Criteria criteria=getSession().createCriteria(entityClass);
-		//criteria.add(Restrictions.ne("isDeleted",1));
-		return criteria.list();
+	
 	}
 
 
