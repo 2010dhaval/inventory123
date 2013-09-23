@@ -26,7 +26,7 @@ import com.untitle.inventory.service.IRangeMasterService;
 
 public class TestGridDataAction extends CommonAction{
 
-	HttpServletRequest request;
+	//HttpServletRequest request;// dhaval
 	@Autowired
 	IREQMasterService reqMasterService;
 	
@@ -106,6 +106,13 @@ public class TestGridDataAction extends CommonAction{
 	{
 		FilterCriteria filterCriteria = new FilterCriteria();
 		GridData gridData;
+		
+		String materialId = request.getParameter("materialId");
+		String purchaseId = request.getParameter("purchaseId");
+		
+		System.out.println(materialId);
+		System.out.println(purchaseId);
+		
 		filterCriteria.setSidx(request.getParameter("sidx")==null?"id":request.getParameter("sidx"));
 		filterCriteria.setSord(request.getParameter("sord")==null?"ASC":request.getParameter("sord"));
 		filterCriteria.setCurrentPage(request.getParameter("page")==null?"1":request.getParameter("page"));
@@ -117,7 +124,9 @@ public class TestGridDataAction extends CommonAction{
 		}		
 		int count;
 		List<RangeMasterDTO> rangeMasterDTOs=new ArrayList<RangeMasterDTO>();
-		gridData=reqMasterService.getREQDetails(filterCriteria);
+		
+		gridData=reqMasterService.getREQDetails(filterCriteria, materialId, purchaseId);
+		
 		count = gridData.getCount();
 		jsonData = new JQGridJSON();
 		jsonData.setPage(filterCriteria.getCurrentPage());//pageCount
@@ -126,18 +135,22 @@ public class TestGridDataAction extends CommonAction{
 		List<JQGridRow> rows = new ArrayList<JQGridRow>();
 		List<REQDTO> rangeGridData = new ArrayList<REQDTO>();
 		rangeGridData = (List<REQDTO>) gridData.getListData();
-		for(REQDTO objRange:rangeGridData)
+		for(REQDTO objReq:rangeGridData)
 		{
 			JQGridRow row = new JQGridRow(); 
 			List<String> cells = new ArrayList<String>();
 			cells.add("false");
-			cells.add(objRange.getPreqNPO());
-			cells.add(objRange.getPreqItem());
-			cells.add(objRange.getPurGroup());
-			cells.add(objRange.getMaterial());
-			cells.add(objRange.getPlant());
-			cells.add(objRange.getMaterialGroup());
-			row.setId(""+objRange.getId());
+			cells.add(objReq.getPreqNPO());
+			cells.add(objReq.getPreqItem());
+			cells.add(objReq.getPurGroup());
+			cells.add(objReq.getMaterial());
+			cells.add(objReq.getPlant());
+			cells.add(objReq.getMaterialGroup());
+			
+			cells.add(objReq.getQuantity()+"");
+			cells.add(objReq.getDelivDate()+"");
+			
+			row.setId(""+objReq.getId());
 			row.setCell(cells); 
 			rows.add(row);
 		}
