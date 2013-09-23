@@ -208,8 +208,8 @@ public class CommonDAO<T> extends HibernateDaoSupport implements ICommonDAO<T> {
 		criteria.setFirstResult(start);
 		criteria.setMaxResults(limitInt);*/	
 		
-		criteria.add(Restrictions.eq("materialId", map.get("materialId")));
-		criteria.add(Restrictions.eq("purchaseId", map.get("purchaseId")));
+		criteria.add(Restrictions.eq("materialGroup", map.get("materialId")));
+		criteria.add(Restrictions.eq("purGroup", map.get("purchaseId")));
 		
 		return criteria.list();
 		}catch (Exception e) {
