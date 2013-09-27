@@ -153,7 +153,7 @@
 		    $('#navgrid').jqGrid('delRowData',unselectedIds[k], {reloadAfterSubmit: true});
 		   //$('#navgrid').delRowData(unselectedIds[i]);
 		    }
-		    jQuery("#navgrid").setGridParam({url:'testGridDataAction.action',page:1}).trigger('reloadGrid');
+		   
 		    
 		    jQuery("#navgrid").showCol('input');
 		    jQuery("#tesDiv").hide();
