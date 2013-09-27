@@ -13,7 +13,7 @@
 				{
 					colNames : [ 'select', 'PREQ No', 'PREQ Item',
 							'Purchase Grp', 'Material', 'Plant',
-							'Material Grp', 'Quantity', 'Date' ],
+							'Material Grp', 'Quantity', 'Date','input' ],
 					colModel : [ {
 						name : 'select',
 						index : 'select',
@@ -59,13 +59,19 @@
 						name : 'quantity',
 						index : 'quantity',
 						//width : 50,
-						editable : false
+						editable : true
 					}, {
 						name : 'delivDate',
 						index : 'delivDate',
 						//width : 150,
 						editable : false
-					} ],
+					}
+					, {
+						name : 'input',
+						index : 'input',
+						//width : 150,
+						editable : true
+					}],
 					//url : 'testGridDataAction.action?materialId='+'%%'+'&purchaseId='+'%%',
 					pager : '#pagernav',
 					datatype : "json",
@@ -124,10 +130,9 @@
 	});
 
 	$(document).ready(function() {
-		//jQuery("#navgrid").hideCol('select');
+		jQuery("#navgrid").hideCol('input');
 
-		/*
-		$("#submit").click(function() { 
+		$("#create").click(function() { 
 			var unselectedIds = new Array();
 			var j=0;
 		    for (var i = 1; i <= $("#navgrid").getGridParam("reccount"); i++) {
@@ -144,13 +149,17 @@
 		    alert(unselectedIds.length);
 		    for(var k=0;k< unselectedIds.length;k++)
 		   {
-		   alert(k);
+		    alert(k);
 		    $('#navgrid').jqGrid('delRowData',unselectedIds[k], {reloadAfterSubmit: true});
+		   //$('#navgrid').delRowData(unselectedIds[i]);
 		    }
-		    jQuery("#navgrid").hideCol('select');
-		    jQuery("#tesDiv").show();
+		    jQuery("#navgrid").setGridParam({url:'testGridDataAction.action',page:1}).trigger('reloadGrid');
+		    
+		    jQuery("#navgrid").showCol('input');
+		    jQuery("#tesDiv").hide();
+		    jQuery("#headerInput").show();
 		      	
-		   });*/
+		   });
 
 		$("#cancel").click(function() {
 			/* jQuery('#testForm')[0].reset();
