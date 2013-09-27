@@ -51,6 +51,8 @@
 
 
 						</TABLE>
+						
+						
 					</TD>
 					
 				</TR>
@@ -77,8 +79,26 @@
 <DIV id="grid" ">
 			<TABLE id="navgrid"></TABLE>
 <div id="pagernav"></div>
+	<table style="display: none;" id="headerInput">
+						<tr>
+						<td>Header Input1</td>
+						<TD><input type="text" name="input1" id="input1"/></TD>
+						</tr>
+						<tr>
+						<td>Header Input2</td>
+						<TD><input type="text" name="input2" id="input2"/></TD>
+						</tr>		
+						</table>
+	
+<DIV class="buttonwrapper"
+										id="SubmidAndCancel" name="SubmidAndCancel">
+										<A class="boldbuttons" id="create" tabindex=3><SPAN>submit
+										</SPAN></A>
+										
+									</DIV>
 		</DIV>
-
+		<div>
+		</div>
 
 	<SCRIPT type="text/javascript"
 		src="<%=request.getContextPath()%>/includes/js/testJS.jsp"></SCRIPT>
