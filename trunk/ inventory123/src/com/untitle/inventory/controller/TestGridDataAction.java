@@ -3,6 +3,7 @@ package com.untitle.inventory.controller;
 import java.text.FieldPosition;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,7 +21,12 @@ import com.untitle.inventory.commons.JQGridRow;
 import com.untitle.inventory.dto.MaterialGroupMasterDTO;
 import com.untitle.inventory.dto.PurchaseGroupMasterDTO;
 import com.untitle.inventory.dto.REQDTO;
+import com.untitle.inventory.dto.RFQHeaderDTO;
+import com.untitle.inventory.dto.RFQ_ITEMDTO;
+import com.untitle.inventory.dto.RFQ_ITEM_REQ_DTO;
 import com.untitle.inventory.dto.RangeMasterDTO;
+import com.untitle.inventory.model.RFQ_ITEM;
+import com.untitle.inventory.model.RFQ_ITEM_REQ;
 import com.untitle.inventory.service.IREQMasterService;
 import com.untitle.inventory.service.IRangeMasterService;
 
@@ -149,7 +155,7 @@ public class TestGridDataAction extends CommonAction{
 			
 			cells.add(objReq.getQuantity()+"");
 			cells.add(objReq.getDelivDate()+"");
-			
+			cells.add(objReq.getId()+"");
 			row.setId(""+objReq.getId());
 			row.setCell(cells); 
 			rows.add(row);
@@ -174,6 +180,75 @@ public class TestGridDataAction extends CommonAction{
 	public String getAllPurchaseGroup()
 	{
 		purchaseGroupMasterDTOs=reqMasterService.getPurchaseGroupMasterDetails();
+		return Action.SUCCESS;
+	}
+	
+	public String save()
+	{
+		String ids=request.getParameter("ids");
+		String quantity=request.getParameter("quan");
+		
+		String vStart=request.getParameter("startPeriod");
+		String vend=request.getParameter("endPeriod");
+		String purGroup=request.getParameter("purchaseGrp");
+	    String compCode=request.getParameter("compCode");
+				
+		
+		String idArr[]=ids.split(",");
+		String idQuant[]=quantity.split(",");
+		int i=0;
+		
+		RFQHeaderDTO rfqHeaderDTO=new RFQHeaderDTO();
+		rfqHeaderDTO.setRfqVersion(1l);
+		rfqHeaderDTO.setPurGroup(purGroup);
+		rfqHeaderDTO.setVperEnd(new Date(vend));
+		rfqHeaderDTO.setVperStart(new Date(vStart));
+		rfqHeaderDTO.setCompCode(compCode);
+		
+		reqMasterService.saveRFQHeader(rfqHeaderDTO);
+		
+		List<RFQ_ITEMDTO> rfq_ITEMDTOs=new ArrayList<RFQ_ITEMDTO>();
+		List<RFQ_ITEM_REQ_DTO> rfq_ITEM_REQ_DTOs = new ArrayList<RFQ_ITEM_REQ_DTO>();
+		
+		RFQ_ITEMDTO rfq_ITEMDTO=null;
+		
+		RFQ_ITEM_REQ_DTO rfqItemReqDto = null;
+		
+		Long j=10l;
+		for(i=0;i<idArr.length;i++)
+		{
+			rfq_ITEMDTO=new RFQ_ITEMDTO();
+			REQDTO reqdto=reqMasterService.getREQDetailsById(Long.parseLong(idArr[i]));
+			rfq_ITEMDTO.setMaterial(reqdto.getMaterial());
+			rfq_ITEMDTO.setMaterialGroup(reqdto.getMaterialGroup());
+			rfq_ITEMDTO.setQuantity(Double.parseDouble(idQuant[i]));
+			rfq_ITEMDTO.setRfqItem(j);
+			rfq_ITEMDTO.setRfqVersion(1l);
+			rfq_ITEMDTOs.add(rfq_ITEMDTO);
+			
+			//----------rfqItemReq------------
+			
+			rfqItemReqDto = new RFQ_ITEM_REQ_DTO();
+			
+			rfqItemReqDto.setRfqVersion(1l);
+			rfqItemReqDto.setRfqItem(j);
+			rfqItemReqDto.setRfqReqItem(j);
+			rfqItemReqDto.setPreqNo(reqdto.getPreqNPO());
+			rfqItemReqDto.setPreqItem(Double.parseDouble(reqdto.getPreqItem()));
+			rfqItemReqDto.setMaterial(reqdto.getMaterial());
+			rfqItemReqDto.setPlant(reqdto.getPlant());
+			rfqItemReqDto.setMaterialGroup(reqdto.getMaterialGroup());
+			rfqItemReqDto.setQuantity(Double.parseDouble(reqdto.getQuantity()));
+			
+			rfq_ITEM_REQ_DTOs.add(rfqItemReqDto);
+		}
+		
+		reqMasterService.saveRFQItems(rfq_ITEMDTOs);
+		
+		
+		reqMasterService.saveRFQItemReq(rfq_ITEM_REQ_DTOs);
+		
+		
 		return Action.SUCCESS;
 	}
 

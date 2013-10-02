@@ -184,7 +184,7 @@ public class CommonDAO<T> extends HibernateDaoSupport implements ICommonDAO<T> {
 		try
 		{
 	
-		Criteria criteria=getSession().createCriteria(entityClass);
+ 		Criteria criteria=getSession().createCriteria(entityClass);
 		//criteria.add(Restrictions.ne("isDeleted",1));
 		/*if (searchCond != null)
 		{
@@ -266,6 +266,14 @@ public class CommonDAO<T> extends HibernateDaoSupport implements ICommonDAO<T> {
 			return null;
 		}
 	
+	}
+
+	@Override
+	public void saveOrUpdateAll(List<T> entitys) {
+		// TODO Auto-generated method stub
+		
+		getHibernateTemplate().saveOrUpdateAll(entitys);
+		
 	}
 
 

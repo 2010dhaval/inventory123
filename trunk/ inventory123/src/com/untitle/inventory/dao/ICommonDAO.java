@@ -8,6 +8,7 @@ import com.untitle.inventory.dto.AbstractBaseEntity;
 
 public interface ICommonDAO<T>{
 public void saveOrUpdate(T entity);
+public void saveOrUpdateAll(List<T> entitys);
 public List<Map<String,Object>> findListByQueryForDynamicEntity(String hql);
 public void deleteById(Long id);
 public List<T> findByQuery(String hql,Object values);

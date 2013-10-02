@@ -1,10 +1,12 @@
 package com.untitle.inventory.service.impl;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,11 +18,17 @@ import com.untitle.inventory.dao.ICommonDAO;
 import com.untitle.inventory.dto.MaterialGroupMasterDTO;
 import com.untitle.inventory.dto.PurchaseGroupMasterDTO;
 import com.untitle.inventory.dto.REQDTO;
+import com.untitle.inventory.dto.RFQHeaderDTO;
+import com.untitle.inventory.dto.RFQ_ITEMDTO;
+import com.untitle.inventory.dto.RFQ_ITEM_REQ_DTO;
 import com.untitle.inventory.dto.RangeMasterDTO;
 import com.untitle.inventory.dto.UOMMasterDTO;
 import com.untitle.inventory.model.MaterialGroupMaster;
 import com.untitle.inventory.model.PurchaseGroupMaster;
 import com.untitle.inventory.model.REQMaster;
+import com.untitle.inventory.model.RFQHeader;
+import com.untitle.inventory.model.RFQ_ITEM;
+import com.untitle.inventory.model.RFQ_ITEM_REQ;
 import com.untitle.inventory.model.RangeMaster;
 import com.untitle.inventory.model.UOMMaster;
 import com.untitle.inventory.service.IREQMasterService;
@@ -34,6 +42,15 @@ public class REQMasterService implements IREQMasterService{
 	
 	@Autowired
 	ICommonDAO<MaterialGroupMaster> commonDAO1;
+	
+	@Autowired
+	ICommonDAO<RFQHeader> commonDAO3;
+	
+	@Autowired
+	ICommonDAO<RFQ_ITEM> commonDAO4;
+	
+	@Autowired
+	ICommonDAO<RFQ_ITEM_REQ> commonDAO5;
 	
 	public ICommonDAO<MaterialGroupMaster> getCommonDAO1() {
 		return commonDAO1;
@@ -62,6 +79,18 @@ public class REQMasterService implements IREQMasterService{
 	public void setCommonDAO(ICommonDAO<REQMaster> commonDAO) {
 		this.commonDAO = commonDAO;
 	}
+	
+	public ICommonDAO<RFQ_ITEM> getCommonDAO4() {
+		return commonDAO4;
+	}
+
+	public void setCommonDAO4(ICommonDAO<RFQ_ITEM> commonDAO4) {
+		this.commonDAO4 = commonDAO4;
+	}
+
+	
+	
+	
 
 	@Override
 	public GridData getREQDetails(FilterCriteria filterCriteria, String materialId, String purchaseId) {
@@ -182,4 +211,95 @@ public class REQMasterService implements IREQMasterService{
 		return purchaseGroupMasterDTOs;
 		
 	}
+
+	@Override
+	public REQDTO getREQDetailsById(Long id) {
+		// TODO Auto-generated method stub
+		
+		REQMaster reqMaster=commonDAO.getById(REQMaster.class, id);
+		return getDTOFromMaster(reqMaster);
+	}
+
+	@Override
+	public void saveRFQHeader(RFQHeaderDTO rfqHeaderDTO) {
+		// TODO Auto-generated method stub
+		
+		RFQHeader rfqHeader=new RFQHeader();
+		rfqHeader.setCompCode(rfqHeaderDTO.getCompCode());
+		rfqHeader.setPurGroup(rfqHeaderDTO.getPurGroup());
+		rfqHeader.setRfqVersion(rfqHeaderDTO.getRfqVersion());
+		rfqHeader.setVperStart(rfqHeaderDTO.getVperStart());
+		rfqHeader.setVperEnd(rfqHeaderDTO.getVperEnd());
+		
+		commonDAO3.saveOrUpdate(rfqHeader);
+	}
+
+	public ICommonDAO<RFQHeader> getCommonDAO3() {
+		return commonDAO3;
+	}
+
+	public void setCommonDAO3(ICommonDAO<RFQHeader> commonDAO3) {
+		this.commonDAO3 = commonDAO3;
+	}
+
+	@Override
+	public void saveRFQItems(List<RFQ_ITEMDTO> rfq_ITEMDTOs) {
+		// TODO Auto-generated method stub
+		
+		List<RFQ_ITEM> rfq_ITEMs=new ArrayList<RFQ_ITEM>();
+		RFQ_ITEM rfq_ITEM=null;
+		
+		for(RFQ_ITEMDTO rfq_ITEMDTO:rfq_ITEMDTOs)
+		{
+			rfq_ITEM=new RFQ_ITEM();
+			rfq_ITEM.setMaterial(rfq_ITEMDTO.getMaterial());
+			rfq_ITEM.setMaterialGroup(rfq_ITEMDTO.getMaterialGroup());
+			rfq_ITEM.setQuantity(rfq_ITEMDTO.getQuantity());
+			rfq_ITEM.setRfqItem(rfq_ITEMDTO.getRfqItem());
+			rfq_ITEM.setRfqVersion(rfq_ITEMDTO.getRfqVersion());
+			
+			rfq_ITEMs.add(rfq_ITEM);
+		}
+		
+		commonDAO4.saveOrUpdateAll(rfq_ITEMs);
+		
+	}
+	
+	@Override
+	public void saveRFQItemReq(List<RFQ_ITEM_REQ_DTO> rfq_ITEM_REQ_DTOs) {
+		
+		
+		List<RFQ_ITEM_REQ> rfq_ITEM_reqs=new ArrayList<RFQ_ITEM_REQ>();
+		
+		RFQ_ITEM_REQ rfq_ITEM_req=null;
+		
+		for(RFQ_ITEM_REQ_DTO rfq_ITEM_REQ_DTO : rfq_ITEM_REQ_DTOs)
+		{
+			rfq_ITEM_req=new RFQ_ITEM_REQ();			
+						
+			rfq_ITEM_req.setRfqVersion(rfq_ITEM_REQ_DTO.getRfqVersion());
+			rfq_ITEM_req.setRfqItem(rfq_ITEM_REQ_DTO.getRfqItem());
+			rfq_ITEM_req.setRfqReqItem(rfq_ITEM_REQ_DTO.getRfqReqItem());
+			rfq_ITEM_req.setPreqNo(rfq_ITEM_REQ_DTO.getPreqNo());
+			rfq_ITEM_req.setPreqItem(rfq_ITEM_REQ_DTO.getPreqItem());
+			rfq_ITEM_req.setMaterial(rfq_ITEM_REQ_DTO.getMaterial());
+			rfq_ITEM_req.setPlant(rfq_ITEM_REQ_DTO.getPlant());
+			rfq_ITEM_req.setMaterialGroup(rfq_ITEM_REQ_DTO.getMaterialGroup());
+			rfq_ITEM_req.setQuantity(rfq_ITEM_REQ_DTO.getQuantity());
+			
+			rfq_ITEM_reqs.add(rfq_ITEM_req);
+		}
+		
+		commonDAO5.saveOrUpdateAll(rfq_ITEM_reqs);
+		
+	}
+
+	public ICommonDAO<RFQ_ITEM_REQ> getCommonDAO5() {
+		return commonDAO5;
+	}
+
+	public void setCommonDAO5(ICommonDAO<RFQ_ITEM_REQ> commonDAO5) {
+		this.commonDAO5 = commonDAO5;
+	}
+	
 }
