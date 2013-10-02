@@ -5,8 +5,22 @@
 %>
 
 
-	var ids = new Array();
+
 	var refNos=new Array();
+	
+	//--for start validity date picker--
+	    				  $( "#startPeriod" ).datepicker({
+	    				// minDate: new Date(currentYear, currentMonth, currentDate)
+	    				changeMonth: true,
+						changeYear: true,
+	    				 });
+	    				 
+	    				 //--for end validity date picker--
+	    				  $( "#endPeriod" ).datepicker({
+	    				// minDate: new Date(currentYear, currentMonth, currentDate)
+	    				changeMonth: true,
+						changeYear: true,
+	    				 });
 	
 	jQuery(function() {
 		var flag = 1;
@@ -15,7 +29,7 @@
 				{
 					colNames : [ 'select', 'PREQ No', 'PREQ Item',
 							'Purchase Grp', 'Material', 'Plant',
-							'Material Grp', 'Quantity', 'Date' ],
+							'Material Grp', 'Quantity', 'Date','id' ],
 					colModel : [ {
 						name : 'select',
 						index : 'select',
@@ -56,17 +70,22 @@
 					}, {
 						name : 'materialGrp',
 						index : 'materialGrp',
-						//width : 90,
+						width : 90,
 						editable : false
 					}, {
 						name : 'quantity',
 						index : 'quantity',
-						//width : 50,
+						width : 50,
 						editable : false
 					}, {
 						name : 'delivDate',
 						index : 'delivDate',
-						//width : 150,
+						width : 150,
+						editable : false
+					},{
+						name : 'id',
+						index : 'id',
+						width : 0,
 						editable : false
 					}],
 					
@@ -99,7 +118,7 @@
 				{
 					colNames : [ 'select','PREQ No', 'PREQ Item',
 							'Purchase Grp', 'Material', 'Plant',
-							'Material Grp', 'Quantity', 'Date' ],
+							'Material Grp', 'Quantity', 'Date','id' ],
 					colModel : [{
 						name : 'select',
 						index : 'select',
@@ -146,11 +165,17 @@
 						name : 'quantity',
 						index : 'quantity',
 						//width : 50,
-						editable : true
+						editable : true,
+						
 					}, {
 						name : 'delivDate',
 						index : 'delivDate',
 						//width : 150,
+						editable : false
+					},{
+						name : 'id',
+						index : 'id',
+						width : 0,
 						editable : false
 					}
 					],
@@ -167,13 +192,13 @@
 					//height : 400,
 					//width : 900,
 					autoWidth : true,
-
+					cellEdit: true,
 					shrinkToFit : true,
 					//hidegrid : false,
 					onCellSelect : function(select) {
 						//  if(select && select!==lastsel2){
 						// jQuery('#rowed5').restoreRow(lastsel2);
-						//jQuery('#navgrid').editRow(select, true);
+						jQuery('#navgrid').editRow(select, true);
 						//  } 
 					}
 				});
@@ -223,18 +248,18 @@
 		    for (var i = 1; i <= $("#navgrid").getGridParam("reccount"); i++) {
 		    	var aa = $('#navgrid').jqGrid('getDataIDs');
 		        var ret = $("#navgrid").getRowData(aa[i-1]);
-		        alert(aa);
-		       alert(ret.select);
+		        //alert(aa);
+		       //alert(ret.select);
 		        if(ret.select=="false")
 			        {
 			        unselectedIds[j++]=i;
 			        } 
 			          
 		    }
-		    alert(unselectedIds.length);
+		    //alert(unselectedIds.length);
 		    for(var k=0;k< unselectedIds.length;k++)
 		   {
-		    alert(k);
+		    //alert(k);
 		    $('#navgrid').jqGrid('delRowData',unselectedIds[k], {reloadAfterSubmit: false});
 		   //$('#navgrid').delRowData(unselectedIds[i]);
 		    }
@@ -245,17 +270,17 @@
 		    jQuery("#headerInput").show();
 		     --------------------- 	*/
 		     var j=0;
-			alert($("#navgrid").getGridParam("reccount"));
+			//alert($("#navgrid").getGridParam("reccount"));
 		    for (var i = 1; i <= $("#navgrid").getGridParam("reccount"); i++) {
 		    	var aa = $('#navgrid').jqGrid('getDataIDs');
 		        var ret = $("#navgrid").getRowData(aa[i-1]);
 		        
-		        alert("Select" + ret.select);
+		        //alert("Select" + ret.select);
 		        if(ret.select == "true")
 			        {
 			        refNos[j] = aa[i-1];
-			        alert(refNos[j]);
-			        $('#navgrid2').jqGrid('addRowData',1,ret);
+			        //alert(refNos[j]);
+			        $('#navgrid2').jqGrid('addRowData',j,ret);
 			        j++;
 			        }   
 		 	
@@ -284,8 +309,8 @@
 				var purchaseId = document.getElementById("purchaseGrp").value;
 				//var toDate = document.getElementById("toDate").value;
 
-				alert(materialId);
-				alert(purchaseId);
+				//alert(materialId);
+				//alert(purchaseId);
 				//alert(toDate);
 
 				// alert("else called");
@@ -304,3 +329,32 @@
 				jQuery("#grid").show();
 
 			});
+			
+			
+			$("#btnSave").click(function() {
+			var ids = new Array();
+			var quant = new Array();
+			var j=0;
+			//alert($("#navgrid2").getGridParam("reccount"));
+		    for (var i = 1; i <= $("#navgrid2").getGridParam("reccount"); i++) {		    
+		    	var aa = $('#navgrid2').jqGrid('getDataIDs');
+		        var ret = $("#navgrid2").getRowData(aa[i-1]);
+		        //alert(ret.id);
+		        //alert(ret.preqItem);
+			        ids[j] = ret.id;
+			        quant[j]=ret.quantity;
+			        j++;
+			}
+			$("#ids").val(ids);	
+			$("#quan").val(quant);	
+			
+			jQuery('#testForm').ajaxSubmit(
+						{
+							dataType : "json",
+							url : "testDataModifyAction.action"
+							
+						});	
+			alert('Data saved successfully..!!');
+							location.reload();
+				
+		});

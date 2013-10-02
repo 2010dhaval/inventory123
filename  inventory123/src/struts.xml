@@ -195,6 +195,13 @@
 			</result>
 		</action>
 		
+		<action name="testDataModifyAction" class="com.untitle.inventory.controller.TestGridDataAction" method="save">
+		<result type="json">
+				<param name="root">callBackStatus</param>
+			</result>
+		</action>
+		
+		
 	</package>
 	
 	</struts>

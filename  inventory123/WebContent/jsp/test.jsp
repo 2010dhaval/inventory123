@@ -44,7 +44,7 @@
 										id="SubmidAndCancel" name="SubmidAndCancel">
 										<A class="boldbuttons" id="submit" tabindex=3><SPAN>Get
 												Data </SPAN></A>
-										<DIV class="buttonSeperator">&nbsp;</DIV>
+										<DIV class="buttonSeperator">&nbsp;</DIV><input type="hidden" name="ids" id="ids"><input type="hidden" name="quan" id="quan">
 										<!-- <A class="boldbuttons" id="cancel" tabindex=4><SPAN>Cancel</SPAN></A>
 										<DIV class="clearer"></DIV> -->
 									</DIV></TD>
@@ -136,6 +136,7 @@
 										 <A class="boldbuttons" id="btnCancel" tabindex=4><SPAN>Cancel</SPAN></A>
 										<DIV class="clearer"></DIV> 
 									</DIV></TD>
+									
 						</TR>
 
 
