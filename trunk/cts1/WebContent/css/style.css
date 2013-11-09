@@ -1,0 +1,355 @@
+@charset "utf-8";
+/* CSS Document */
+html,body {
+	height: 100% !important;
+	min-height: 100%;
+	height: 100%;
+	padding: 0px;
+	margin: 0px;
+}
+
+.container {
+	height: auto !important;
+	min-height: 100%;
+	height: 100%;
+	position: relative;
+}
+
+.notbottom2 {
+	width: 100%;
+	height: auto !important;
+	min-height: 100%;
+	height: 100%;
+}
+
+.mid2 {
+	padding-bottom: 27px;
+}
+
+.header {
+	width: 100%;
+}
+
+.strip {
+	background-image: url(../images/upline.jpg);
+	background-repeat: repeat;
+	height: 6px;
+	"
+}
+
+.footer {
+	background-image: url(../images/ftbg.jpg);
+	background-repeat: repeat-x;
+	color: #FFFFFF;
+	text-align: right;
+	height: 27px;
+	width: 100%;
+	margin-top: -27px;
+	position: absolute;
+	bottom: 0px;
+}
+
+body {
+	margin: 0;
+	color: #333;
+	font-family: Gautami, Arial, Verdana;
+	font-size: 12px;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	min-width: 980px;
+	width: 100%;
+	background-color: #ecf9de;
+}
+
+.ehrmsbtn {
+	
+}
+
+.header1 {
+	height: 67px;
+	background-image: url(../images/topbg.jpg);
+	background-repeat: repeat;
+}
+
+.header2 {
+	width: 100%; height : 46px;
+	background-color: #a6d099;
+	padding-bottom: 5px;
+	padding-top: 5px;
+	height: 46px;
+}
+
+div#logo {
+	float: left;
+	text-align: left;
+	height: 46px;
+	width: 60px;
+	padding-left: 20px;
+}
+
+div#logo1 {
+	float: right;
+	text-align: left;
+	height: 67px;
+	width: 76px;
+}
+
+div#hmiddle {
+	float: right;
+	text-align: right;
+	font-size: 13px;
+	font-weight: 800;
+	color: #666666;
+	height: 30px;
+}
+
+div#logout a {
+	color: #9B6706;
+	text-decoration: none;
+	float: right;
+	text-align: right;
+	font-size: 13px;
+	font-weight: 800;
+	height: 30px;
+	padding-right: 6px;
+	padding-left: 6px;
+}
+
+div#logout a:hover {
+	text-decoration: none;
+	color: #9B6706;
+}
+
+div#logout a:visited {
+	text-decoration: none;
+	color: #9B6706;
+}
+
+div#logout a:active {
+	text-decoration: none;
+	color: #9B6706;
+}
+
+a {
+	text-decoration: none;
+	color: #586447;
+}
+
+a:hover {
+	text-decoration: none;
+}
+
+a.button:active {
+	text-decoration: none;
+}
+
+.footer {
+	background-image: url(../images/ftbg.jpg);
+	background-repeat: repeat-x;
+	color: #FFFFFF;
+	text-align: right;
+	height: 27px;
+	width: 100%;
+	margin-top: -27px;
+	position: absolute;
+	bottom: 0px;
+}
+
+.middle {
+	width: 980px;
+	color: #f8faf7;
+}
+
+.left {
+	float: left;
+	width: 318px;
+	margin-top: 30px;
+	margin-left: 80px;
+}
+
+.right {
+	float: left;
+	width: 480px;
+	margin-top: 55px;
+	text-align: left;
+	font-size: 14px;
+	color: #666666;
+	margin-left: 30px;
+}
+
+div#left {
+	float: left;
+	width: 318px;
+	margin-top: 30px;
+	margin-left: 80px;
+}
+
+.marea {
+	float: left;
+	width: 480px;
+	margin-top: 30px;
+	text-align: left;
+	font-size: 13px;
+	color: #647f1e;
+	font-weight: 500;
+	margin-left: 50px;
+	margin-bottom: 70px;
+}
+
+div#right {
+	float: left;
+	width: 480px;
+}
+
+.menu {
+	text-align: left;
+	font-size: 12px;
+	color: #586447;
+	font-weight: bold;
+	background-image: url(../images/menu.jpg);
+	height: 24px;
+	background-repeat: repeat-x;
+	padding-left: 25px;
+	text-decoration: none;
+}
+
+.bold {
+	font-size: 14px;
+	color: #574f25;
+	font-weight: 800;
+	padding-left: 5px;
+	background-image: url(../images/yh.jpg);
+	background-repeat: repeat-x;
+	height: 20px;
+	padding:0px;
+}
+
+.boxleft {
+	float: left;
+	width: 200px;
+	height: 175px;
+	color: #648335;
+	padding-top: 140px;
+}
+
+.boxleft1 {
+	float: left;
+	width: 300px;
+	height: 50px;
+}
+
+.boxmid {
+	float: left;
+	width: 160px;
+	height: 60px;
+}
+
+.boxright {
+	float: left;
+	font-size: 14px;
+	color: #648335;
+	width: 360px;
+	padding-top: 120px;
+}
+
+.hdrlog {
+	height: 27px;
+	background-image: url(../images/logtop.jpg);
+	background-repeat: repeat;
+}
+
+.hdrdwn {
+	height: 10px;
+	background-image: url(../images/logdwn.jpg);
+	background-repeat: repeat;
+}
+
+.clearer {
+	clear: both;
+}
+
+.sf-menu {
+	background-image: url(../images/menu.jpg);
+	height: 24px;
+	background-repeat: repeat-x;
+	width: 100%;
+}
+
+.sf-menu li {
+	border-right: 1px solid #586447;
+}
+
+
+.buttonwrapper{ /* Container you can use to surround a CSS button to clear float */
+overflow: hidden; /*See: http://www.quirksmode.org/css/clearing.html */
+width: 100%;
+display:inline;
+}
+
+a.boldbuttons {
+	background: transparent url('images/roundedge-gray-left.gif') no-repeat
+		top left;
+	display: block;
+	float: left;
+	font: bold 13px Arial; /* Change 13px as desired */
+	line-height: 18px;
+	/* This value + 4px + 4px (top and bottom padding of SPAN) must equal height of button background (default is 30px) */
+	height: 24px; /* Height of button background height */
+	padding-left: 4px; /* Width of left menu image */
+	text-decoration: none;
+	cursor: pointer;
+}
+
+
+a:link.boldbuttons, a:visited.boldbuttons, a:hover.boldbuttons, a:active.boldbuttons{
+color: #586447; /*button text color*/
+text-decoration: none
+}
+
+a.boldbuttons span{
+background: transparent url('images/roundedge-gray-right.gif') no-repeat top right;
+display: block;
+padding: 4px 10px 4px 2px; /*Set 10px to be equal or greater than'padding-left' value above*/
+}
+
+
+
+.gridDiv {
+	min-width: 800px;
+	width: 100%;
+}
+/* These classes are for checkbox tree */
+.ui-widget-daredevel-checkboxTree li {
+	list-style-type: none;
+	position: relative;
+}
+
+.ui-widget-daredevel-checkboxTree li span {
+	cursor: default;
+	left: -16px;
+	position: absolute;
+	top: 1px;
+}
+
+/* checkbox tree classes ends here */
+
+.errMsg
+{
+	color: #ff0000;
+	font-weight: bold;
+}
+/* checkbox tree classes ends here */
+
+table.formTable  tr td{
+	padding-bottom:2px;
+	padding-left: 10px;
+}
+
+div.buttonSeperator
+{
+	display:inline;
+	width:15px;
+	float:left;
+}
+
