@@ -1,0 +1,25 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+	<!-- <bean id="userMasterDAO" class="com.untitle.oas.dao.impl.UserMasterDAO"
+		scope="prototype">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="menuMasterDAO" class="com.untitle.oas.dao.impl.MenuMasterDAO">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="menuAccessDAO" class="com.untitle.oas.dao.impl.MenuAccessDAO">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="registrationDAO" class="com.untitle.oas.dao.impl.RegistrationDAO">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="courseMasterDAO" class="com.untitle.oas.dao.impl.CourseMasterDAO">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean> -->
+	<bean id="commonDAO" class="com.untitle.inventory.dao.impl.CommonDAO">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+</beans>	
